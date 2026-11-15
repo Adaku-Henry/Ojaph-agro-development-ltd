@@ -37,7 +37,7 @@ const services = [
 const reasons = [
   { icon: ShieldCheck, image: COMPANY_ACTIVITY_PHOTOS.shopService, title: 'Responsible product guidance', description: 'We encourage customers to read and follow product labels and safe-use instructions.' },
   { icon: Users, image: COMPANY_ACTIVITY_PHOTOS.fieldLearning, title: 'Farmer-centred support', description: 'Our products and services focus on the needs of farmers and agricultural communities.' },
-  { icon: MapPin, image: COMPANY_ACTIVITY_PHOTOS.cassavaFieldTeam, title: 'Based in Kubala', description: `Our listed main location is ${COMPANY.shortAddress}.` },
+  { icon: MapPin, image: COMPANY_ACTIVITY_PHOTOS.cassavaFieldTeam, title: 'Our locations', description: `Kubala, Uleppi Trading Centre, Lazeebu Trading Centre, and the Arua City farmer learning centre for greenhouse production.` },
 ];
 
 export default function HomePage({ onNavigate }: HomePageProps) {
@@ -272,7 +272,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             </a>
             <div className="card flex items-center gap-3 p-5">
               <MapPin aria-hidden="true" className="h-5 w-5 shrink-0 text-primary-700" />
-              <span className="text-sm font-semibold text-gray-800">{COMPANY.shortAddress}</span>
+              <span className="text-sm font-semibold text-gray-800">{COMPANY.locationSummary}</span>
             </div>
           </div>
         </div>

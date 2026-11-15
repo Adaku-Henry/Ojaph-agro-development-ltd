@@ -93,7 +93,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
           </div>
           <p className="hidden items-center gap-2 text-primary-50 md:inline-flex">
             <MapPin aria-hidden="true" className="h-4 w-4 shrink-0" />
-            {COMPANY.shortAddress}
+            {COMPANY.locationSummary}
           </p>
         </div>
       </div>

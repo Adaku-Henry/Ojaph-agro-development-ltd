@@ -315,7 +315,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
                 Our Geographical Coverage
               </h2>
               <p className="text-gray-600 leading-relaxed mb-6">
-                Our main location is in Kubala Trading Centre. We also work in Uleppi Trading Centre in Madi-Okollo District and Lazeebu Trading Centre in Arua District. In Arua City, our farmer learning centre supports greenhouse production. Contact us to confirm directions and availability before travelling.
+                Our locations include {COMPANY.locationSummary}. The embedded Google Maps pin shows Kubala only. Contact us to confirm directions and availability before travelling.
               </p>
               <div className="grid gap-3 sm:grid-cols-2">
                 {COMPANY.locations.map((location) => (

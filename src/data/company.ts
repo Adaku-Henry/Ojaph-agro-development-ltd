@@ -2,9 +2,10 @@ export const COMPANY = {
   name: 'OJAPH AGRO DEVELOPMENT LIMITED',
   slogan: 'Farming for Development',
   phone1: '0773 566 620',
-  email: 'ojanduphilliam@gmail.com',
+  email: 'ojaph.oad@gmail.com',
   address: 'Kubala Market, opposite the main gate, Kubala Trading Centre, Omugo Sub-County, Terego District, Uganda.',
   shortAddress: 'Kubala Trading Centre, Omugo Sub-County, Terego District',
+  locationSummary: 'Kubala · Uleppi (Madi-Okollo) · Lazeebu (Arua) · Arua City greenhouse learning centre',
   locations: [
     { name: 'Kubala Trading Centre', description: 'Kubala Market, opposite the main gate, Omugo Sub-County, Terego District, Uganda.' },
     { name: 'Uleppi Trading Centre', description: 'Madi-Okollo District, Uganda.' },

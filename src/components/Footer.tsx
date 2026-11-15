@@ -74,14 +74,19 @@ export default function Footer({ onNavigate }: FooterProps) {
             <ul className="space-y-2 text-sm text-primary-100">
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-accent-400" />
-                <a
-                  href={COMPANY_MAPS.directionsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline decoration-primary-600 underline-offset-2 transition-colors hover:text-accent-300"
-                >
-                  {COMPANY.shortAddress} · Get directions
-                </a>
+                <div className="min-w-0">
+                  <a
+                    href={COMPANY_MAPS.directionsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-primary-600 underline-offset-2 transition-colors hover:text-accent-300"
+                  >
+                    Kubala main location · Get directions
+                  </a>
+                  <span className="mt-1 block text-xs text-primary-200">
+                    Other locations: Uleppi, Lazeebu and the Arua City greenhouse learning centre.
+                  </span>
+                </div>
               </li>
               <li className="flex items-center gap-2">
                 <img src={BRAND_ASSETS.phone} alt="" aria-hidden="true" className="h-5 w-5 shrink-0 object-contain" />

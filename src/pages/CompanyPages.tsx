@@ -144,9 +144,16 @@ export function ContactPage() {
               </a>
               <div className="card flex items-start gap-4 p-6">
                 <MapPin aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-primary-700" />
-                <span>
+                <span className="min-w-0">
                   <span className="block font-semibold text-gray-900">Visit us</span>
-                  <span className="mt-1 block leading-relaxed text-gray-600">{COMPANY.address}</span>
+                  <span className="mt-2 block space-y-2 text-sm leading-relaxed text-gray-600">
+                    {COMPANY.locations.map((location, index) => (
+                      <span key={location.name} className="block">
+                        <span className="font-semibold text-gray-800">{index === 0 ? 'Main: ' : ''}{location.name}</span>
+                        <span className="block text-xs">{location.description}</span>
+                      </span>
+                    ))}
+                  </span>
                 </span>
               </div>
               <a
@@ -199,13 +206,36 @@ export function ContactPage() {
             </form>
           </div>
           <section className="mt-10 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm" aria-labelledby="company-map-title">
+            <div className="border-b border-gray-200 bg-gradient-to-br from-primary-50/80 via-white to-primary-50/50 px-6 py-7 sm:px-8">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-accent-700">Visit us</p>
+              <h2 className="mt-2 font-display text-2xl font-bold text-primary-950">Our locations</h2>
+              <p className="mt-2 max-w-3xl text-sm leading-relaxed text-gray-600">
+                Our locations include {COMPANY.locationSummary}. The embedded map below points to Kubala only. Contact us to confirm directions and arrange your visit.
+              </p>
+              <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                {COMPANY.locations.map((location, index) => (
+                  <article key={location.name} className="rounded-xl border border-primary-100 bg-white p-4 shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-primary-700">
+                        <MapPin aria-hidden="true" className="h-4 w-4" />
+                      </span>
+                      <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent-700">
+                        {index === 0 ? 'Main location' : 'Additional location'}
+                      </span>
+                    </div>
+                    <h3 className="mt-3 font-display text-base font-bold text-primary-950">{location.name}</h3>
+                    <p className="mt-1 text-xs leading-relaxed text-gray-600">{location.description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
             <div className="flex flex-col gap-5 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
               <div className="flex items-start gap-4">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary-700">
                   <MapPin aria-hidden="true" className="h-5 w-5" />
                 </span>
                 <div>
-                  <h2 id="company-map-title" className="font-display text-xl font-bold text-gray-900">Find us on Google Maps</h2>
+                  <h2 id="company-map-title" className="font-display text-xl font-bold text-gray-900">Kubala main location on Google Maps</h2>
                   <p className="mt-2 max-w-2xl text-sm leading-relaxed text-gray-600">{COMPANY.address}</p>
                 </div>
               </div>
@@ -229,7 +259,7 @@ export function ContactPage() {
               />
             </div>
             <p className="px-6 py-3 text-xs leading-relaxed text-gray-500 sm:px-8">
-              The map uses the published company address. Please check the Kubala Market landmark and map pin before travelling.
+              This map pin shows the Kubala main location only. The other locations are listed above; please contact us to confirm directions before travelling.
             </p>
           </section>
         </div>
@@ -245,7 +275,7 @@ const faqs = [
   },
   {
     question: 'Where are you located?',
-    answer: `${COMPANY.address}`,
+    answer: `Our main location is ${COMPANY.address} Other locations: Uleppi Trading Centre in Madi-Okollo District, Lazeebu Trading Centre in Arua District, and the farmer learning centre for greenhouse production in Arua City.`,
   },
   {
     question: 'Do you provide farming advice and training?',
