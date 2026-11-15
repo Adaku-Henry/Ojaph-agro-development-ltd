@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Sprout, GraduationCap, Leaf, TrendingUp, BookOpen, MapPin, Calendar, ArrowRight, CheckCircle2, Image as ImageIcon, Users } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Sprout, GraduationCap, Leaf, TrendingUp, BookOpen, MapPin, Calendar, ArrowRight, CheckCircle2, Image as ImageIcon, Users, X } from 'lucide-react';
 import { type PageId } from '@/data/company';
 import { COMPANY_ACTIVITY_GALLERY, COMPANY_ACTIVITY_PHOTOS } from '@/data/companyActivities';
 import { PageHero, SectionTitle, CTASection } from '@/components/ui';
@@ -9,12 +9,12 @@ interface ProjectsPageProps {
 }
 
 const focusAreas = [
-  { icon: Sprout, title: 'Crop Production Improvement', desc: 'Promoting improved crop varieties, appropriate planting methods and proper crop management.' },
-  { icon: GraduationCap, title: 'Farmer Training & Extension', desc: 'Farmer education, practical demonstrations and knowledge-sharing activities.' },
-  { icon: Leaf, title: 'Demonstration Gardens', desc: 'Practical learning where farmers observe agricultural practices and production methods.' },
-  { icon: Leaf, title: 'Sustainable & Climate-Smart Agriculture', desc: 'Soil conservation, water management, crop diversification and environmentally responsible practices.' },
-  { icon: TrendingUp, title: 'Agricultural Market Development', desc: 'Improving farmers\' understanding of markets, quality requirements and value addition.' },
-  { icon: BookOpen, title: 'Agricultural Skills Development', desc: 'Practical learning and exposure opportunities for students, interns and aspiring professionals.' },
+  { icon: Sprout, image: COMPANY_ACTIVITY_PHOTOS.fieldWorker, title: 'Crop Production Improvement', desc: 'Promoting improved crop varieties, appropriate planting methods and proper crop management.' },
+  { icon: GraduationCap, image: COMPANY_ACTIVITY_PHOTOS.fieldLearning, title: 'Farmer Training & Extension', desc: 'Farmer education, practical demonstrations and knowledge-sharing activities.' },
+  { icon: Leaf, image: COMPANY_ACTIVITY_PHOTOS.vegetableBeds, title: 'Demonstration Gardens', desc: 'Practical learning where farmers observe agricultural practices and production methods.' },
+  { icon: Leaf, image: COMPANY_ACTIVITY_PHOTOS.mulchedRows, title: 'Sustainable & Climate-Smart Agriculture', desc: 'Soil conservation, water management, crop diversification and environmentally responsible practices.' },
+  { icon: TrendingUp, image: COMPANY_ACTIVITY_PHOTOS.shopDisplay, title: 'Agricultural Market Development', desc: 'Improving farmers\' understanding of markets, quality requirements and value addition.' },
+  { icon: BookOpen, image: COMPANY_ACTIVITY_PHOTOS.seedlingTrays, title: 'Agricultural Skills Development', desc: 'Practical learning and exposure opportunities for students, interns and aspiring professionals.' },
 ];
 
 const projects = [
@@ -100,9 +100,17 @@ const updates = [
 
 export default function ProjectsPage({ onNavigate }: ProjectsPageProps) {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [selectedPhoto, setSelectedPhoto] = useState<(typeof COMPANY_ACTIVITY_GALLERY)[number] | null>(null);
+  const photoDialogRef = useRef<HTMLDialogElement>(null);
   const filteredImages = activeCategory === 'All'
     ? COMPANY_ACTIVITY_GALLERY
     : COMPANY_ACTIVITY_GALLERY.filter((img) => img.category === activeCategory);
+
+  useEffect(() => {
+    if (selectedPhoto && photoDialogRef.current && !photoDialogRef.current.open) {
+      photoDialogRef.current.showModal();
+    }
+  }, [selectedPhoto]);
 
   const statusColors: Record<string, string> = {
     'Ongoing': 'bg-primary-100 text-primary-800',
@@ -122,22 +130,36 @@ export default function ProjectsPage({ onNavigate }: ProjectsPageProps) {
       />
 
       {/* Focus Areas */}
-      <section className="section-padding bg-white">
-        <div className="container-page">
+      <section className="section-padding relative isolate overflow-hidden bg-white">
+        <img src={COMPANY_ACTIVITY_PHOTOS.fieldDemonstration.src} alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover" loading="lazy" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-white/85 via-white/80 to-primary-50/85" aria-hidden="true" />
+        <div className="container-page relative">
           <SectionTitle
             eyebrow="Longer-Term Priorities"
             title="Future Development Areas"
             subtitle="Potential areas for future agricultural development; these are not presented as completed projects."
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {focusAreas.map((area) => (
-              <div key={area.title} className="card p-6 group">
-                <div className="mb-4 flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl bg-white">
-                  <area.icon aria-hidden="true" className="h-7 w-7 text-primary-700" />
+          <div className="mb-7 flex items-start gap-3 rounded-2xl border border-primary-200 bg-white/90 p-4 text-sm leading-relaxed text-gray-700 shadow-sm">
+            <ImageIcon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-primary-700" />
+            <p>These images are from the company activities archive and provide visual context only; they do not represent proof that each future development area has been completed.</p>
+          </div>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {focusAreas.map(({ icon: Icon, image, ...area }) => (
+              <article key={area.title} className="group overflow-hidden rounded-2xl border border-primary-100 bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <figure className="relative h-48 overflow-hidden">
+                  <img src={image.src} alt="" aria-hidden="true" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary-950/65 via-transparent to-primary-950/10" aria-hidden="true" />
+                  <figcaption className="absolute bottom-3 left-4 text-xs font-medium text-white drop-shadow">{image.caption}</figcaption>
+                  <span className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-xl bg-white text-primary-700 shadow-lg">
+                    <Icon aria-hidden="true" className="h-5 w-5" />
+                  </span>
+                  <span className="absolute left-4 top-4 rounded-full border border-white/40 bg-primary-950/60 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white">Future focus</span>
+                </figure>
+                <div className="p-6">
+                  <h4 className="font-display text-sm font-bold text-primary-950">{area.title}</h4>
+                  <p className="mt-2 text-xs leading-relaxed text-gray-600">{area.desc}</p>
                 </div>
-                <h4 className="font-display font-bold text-gray-900 mb-2 text-sm">{area.title}</h4>
-                <p className="text-xs text-gray-600 leading-relaxed">{area.desc}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
@@ -225,22 +247,33 @@ export default function ProjectsPage({ onNavigate }: ProjectsPageProps) {
           {/* Gallery grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredImages.map((img) => (
-              <figure key={img.src} className="group relative overflow-hidden rounded-xl shadow-md">
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  loading="lazy"
-                  decoding="async"
-                  className={`h-64 w-full object-cover transition-transform duration-500 ${
-                    img.cropThirdPartySignage ? 'origin-right scale-[2]' : 'group-hover:scale-105'
-                  }`}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-950/85 via-primary-900/15 to-transparent" aria-hidden="true" />
-                <span className="absolute left-3 top-3 rounded bg-primary-950/75 px-2.5 py-1 text-xs font-medium text-white">OJAPH activity</span>
-                <figcaption className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-sm font-semibold text-white">{img.caption}</p>
-                  <p className="mt-1 text-xs text-primary-100">{img.category}</p>
-                </figcaption>
+              <figure key={img.src} className="group overflow-hidden rounded-xl bg-gray-950 shadow-md">
+                <button
+                  type="button"
+                  onClick={() => setSelectedPhoto(img)}
+                  aria-label={`View larger photo: ${img.caption}`}
+                  className="relative block aspect-[4/3] w-full overflow-hidden text-left focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent-400 focus-visible:ring-inset"
+                >
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className={`h-full w-full object-contain ${
+                      img.cropThirdPartySignage ? 'origin-right scale-[2]' : ''
+                    }`}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary-950/80 via-primary-900/10 to-transparent" aria-hidden="true" />
+                  <span className="absolute left-3 top-3 rounded bg-primary-950/75 px-2.5 py-1 text-xs font-medium text-white">OJAPH activity</span>
+                  <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1.5 text-xs font-semibold text-primary-900 opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+                    <ImageIcon aria-hidden="true" className="h-3.5 w-3.5" />
+                    View larger photo
+                  </span>
+                  <span className="absolute bottom-0 left-0 right-0 p-4">
+                    <span className="block text-sm font-semibold text-white">{img.caption}</span>
+                    <span className="mt-1 block text-xs text-primary-100">{img.category}</span>
+                  </span>
+                </button>
               </figure>
             ))}
           </div>
@@ -252,6 +285,42 @@ export default function ProjectsPage({ onNavigate }: ProjectsPageProps) {
           </div>
         </div>
       </section>
+
+      <dialog
+        ref={photoDialogRef}
+        aria-labelledby="activity-photo-caption"
+        onClose={() => setSelectedPhoto(null)}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) photoDialogRef.current?.close();
+        }}
+        className="m-0 h-screen max-h-screen w-screen max-w-none border-0 bg-transparent p-4 backdrop:bg-gray-950/95 sm:p-8"
+      >
+        {selectedPhoto && (
+          <figure className="relative mx-auto flex h-full max-w-6xl flex-col items-center justify-center">
+            <button
+              type="button"
+              onClick={() => photoDialogRef.current?.close()}
+              aria-label="Close photo viewer"
+              className="absolute right-0 top-0 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white text-gray-900 shadow-lg transition-colors hover:bg-accent-100 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent-400"
+            >
+              <X aria-hidden="true" className="h-5 w-5" />
+            </button>
+            <div className="relative flex max-h-[calc(100vh-8rem)] max-w-full items-center justify-center overflow-hidden rounded-lg shadow-2xl">
+              <img
+                src={selectedPhoto.src}
+                alt={selectedPhoto.alt}
+                className={`block max-h-[calc(100vh-8rem)] max-w-full object-contain ${
+                  selectedPhoto.cropThirdPartySignage ? 'origin-right scale-[2]' : ''
+                }`}
+                decoding="async"
+              />
+            </div>
+            <figcaption id="activity-photo-caption" className="mt-4 text-center text-sm font-medium text-white">
+              {selectedPhoto.caption} · {selectedPhoto.category}
+            </figcaption>
+          </figure>
+        )}
+      </dialog>
 
       {/* Impact */}
       <section className="py-16 bg-primary-50/50">

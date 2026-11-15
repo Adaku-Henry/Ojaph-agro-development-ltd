@@ -35,9 +35,9 @@ const services = [
 ];
 
 const reasons = [
-  { icon: ShieldCheck, title: 'Responsible product guidance', description: 'We encourage customers to read and follow product labels and safe-use instructions.' },
-  { icon: Users, title: 'Farmer-centred support', description: 'Our products and services focus on the needs of farmers and agricultural communities.' },
-  { icon: MapPin, title: 'Based in Kubala', description: `Our listed main location is ${COMPANY.shortAddress}.` },
+  { icon: ShieldCheck, image: COMPANY_ACTIVITY_PHOTOS.shopService, title: 'Responsible product guidance', description: 'We encourage customers to read and follow product labels and safe-use instructions.' },
+  { icon: Users, image: COMPANY_ACTIVITY_PHOTOS.fieldLearning, title: 'Farmer-centred support', description: 'Our products and services focus on the needs of farmers and agricultural communities.' },
+  { icon: MapPin, image: COMPANY_ACTIVITY_PHOTOS.cassavaFieldTeam, title: 'Based in Kubala', description: `Our listed main location is ${COMPANY.shortAddress}.` },
 ];
 
 export default function HomePage({ onNavigate }: HomePageProps) {
@@ -197,15 +197,26 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
-      <section className="section-padding bg-primary-50">
-        <div className="container-page">
+      <section className="section-padding relative isolate overflow-hidden bg-primary-50">
+        <img src={COMPANY_ACTIVITY_PHOTOS.vegetableBeds.src} alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover" loading="lazy" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-primary-50/85 via-primary-50/80 to-white/85" aria-hidden="true" />
+        <div className="container-page relative">
           <SectionTitle eyebrow="Why OJAPH" title="Support grounded in practical farming needs" />
           <div className="grid gap-6 md:grid-cols-3">
-            {reasons.map(({ icon: Icon, title, description }) => (
-              <article key={title} className="rounded-2xl bg-white p-6 shadow-sm">
-                <Icon aria-hidden="true" className="h-8 w-8 text-primary-700" />
-                <h3 className="mt-4 font-display text-lg font-bold text-gray-900">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray-600">{description}</p>
+            {reasons.map(({ icon: Icon, image, title, description }) => (
+              <article key={title} className="group overflow-hidden rounded-2xl border border-white/80 bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <figure className="relative h-44 overflow-hidden">
+                  <img src={image.src} alt="" aria-hidden="true" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary-950/65 via-transparent to-primary-950/10" aria-hidden="true" />
+                  <figcaption className="absolute bottom-3 left-4 text-xs font-medium text-white drop-shadow">{image.caption}</figcaption>
+                  <span className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white text-primary-700 shadow-lg">
+                    <Icon aria-hidden="true" className="h-5 w-5" />
+                  </span>
+                </figure>
+                <div className="p-6">
+                  <h3 className="font-display text-lg font-bold text-primary-950">{title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-600">{description}</p>
+                </div>
               </article>
             ))}
           </div>

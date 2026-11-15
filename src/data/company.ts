@@ -6,7 +6,10 @@ export const COMPANY = {
   address: 'Kubala Market, opposite the main gate, Kubala Trading Centre, Omugo Sub-County, Terego District, Uganda.',
   shortAddress: 'Kubala Trading Centre, Omugo Sub-County, Terego District',
   locations: [
-    { name: 'Main location', description: 'Kubala Market, opposite the main gate, Kubala Trading Centre, Omugo Sub-County, Terego District, Uganda.' },
+    { name: 'Kubala Trading Centre', description: 'Kubala Market, opposite the main gate, Omugo Sub-County, Terego District, Uganda.' },
+    { name: 'Uleppi Trading Centre', description: 'Madi-Okollo District, Uganda.' },
+    { name: 'Lazeebu Trading Centre', description: 'Arua District, Uganda.' },
+    { name: 'Farmer Learning Centre · Greenhouse Production', description: 'Arua City, Uganda.' },
   ],
   established: 'April 2022',
   incorporated: '10 November 2022',

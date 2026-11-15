@@ -17,22 +17,22 @@ const objectives = [
 ];
 
 const values = [
-  { icon: Award, title: 'Quality & Excellence', desc: 'We value quality in our agricultural products and the services we provide.' },
-  { icon: Shield, title: 'Integrity & Honesty', desc: 'We conduct business with honesty, transparency and accountability.' },
-  { icon: Heart, title: 'Customer Commitment', desc: 'Farmers and customers are central to our business. We respond to their enquiries and needs.' },
-  { icon: Lightbulb, title: 'Innovation & Learning', desc: 'We encourage continuous improvement, research and adoption of appropriate technologies.' },
-  { icon: TreePine, title: 'Environmental Responsibility', desc: 'We promote sustainable farming, responsible agrochemical use and soil conservation.' },
-  { icon: Handshake, title: 'Partnership & Collaboration', desc: 'We value working relationships with farmers, groups, suppliers and organizations.' },
-  { icon: TrendingUp, title: 'Commitment to Development', desc: 'We believe agricultural development can improve livelihoods and create opportunities.' },
+  { icon: Award, image: COMPANY_ACTIVITY_PHOTOS.shopDisplay, title: 'Quality & Excellence', desc: 'We value quality in our agricultural products and the services we provide.' },
+  { icon: Shield, image: COMPANY_ACTIVITY_PHOTOS.shopService, title: 'Integrity & Honesty', desc: 'We conduct business with honesty, transparency and accountability.' },
+  { icon: Heart, image: COMPANY_ACTIVITY_PHOTOS.fieldVisit, title: 'Customer Commitment', desc: 'Farmers and customers are central to our business. We respond to their enquiries and needs.' },
+  { icon: Lightbulb, image: COMPANY_ACTIVITY_PHOTOS.greenhouseBuild, title: 'Innovation & Learning', desc: 'We encourage continuous improvement, research and adoption of appropriate technologies.' },
+  { icon: TreePine, image: COMPANY_ACTIVITY_PHOTOS.mulchedRows, title: 'Environmental Responsibility', desc: 'We promote sustainable farming, responsible agrochemical use and soil conservation.' },
+  { icon: Handshake, image: COMPANY_ACTIVITY_PHOTOS.fieldDemonstration, title: 'Partnership & Collaboration', desc: 'We value working relationships with farmers, groups, suppliers and organizations.' },
+  { icon: TrendingUp, image: COMPANY_ACTIVITY_PHOTOS.cassavaFieldTeam, title: 'Commitment to Development', desc: 'We believe agricultural development can improve livelihoods and create opportunities.' },
 ];
 
 const approach = [
-  { icon: Sprout, title: 'Agricultural Products', desc: 'Offering seeds, crop-care products, fertilizers and tools for farming needs.' },
-  { icon: Users, title: 'Practical Farmer Support', desc: 'Extension support, field visits and guidance on responsible product use.' },
-  { icon: Leaf, title: 'Demonstration & Learning', desc: 'Demonstration gardens where farmers observe crop performance and learn practically.' },
-  { icon: Globe, title: 'Climate Resilience', desc: 'Encouraging climate-smart practices that reduce drought and weather effects.' },
-  { icon: TrendingUp, title: 'Agricultural Market Development', desc: 'Linking farmers and groups with produce buyers and value-chain actors.' },
-  { icon: Handshake, title: 'Collaboration', desc: 'Working with organizations, suppliers and community stakeholders.' },
+  { icon: Sprout, image: COMPANY_ACTIVITY_PHOTOS.shopDisplay, title: 'Agricultural Products', desc: 'Offering seeds, crop-care products, fertilizers and tools for farming needs.' },
+  { icon: Users, image: COMPANY_ACTIVITY_PHOTOS.fieldVisit, title: 'Practical Farmer Support', desc: 'Extension support, field visits and guidance on responsible product use.' },
+  { icon: Leaf, image: COMPANY_ACTIVITY_PHOTOS.vegetableBeds, title: 'Demonstration & Learning', desc: 'Demonstration gardens where farmers observe crop performance and learn practically.' },
+  { icon: Globe, image: COMPANY_ACTIVITY_PHOTOS.mulchedRows, title: 'Climate Resilience', desc: 'Encouraging climate-smart practices that reduce drought and weather effects.' },
+  { icon: TrendingUp, image: COMPANY_ACTIVITY_PHOTOS.shopService, title: 'Agricultural Market Development', desc: 'Linking farmers and groups with produce buyers and value-chain actors.' },
+  { icon: Handshake, image: COMPANY_ACTIVITY_PHOTOS.cassavaFieldTeam, title: 'Collaboration', desc: 'Working with organizations, suppliers and community stakeholders.' },
 ];
 
 const team = [
@@ -88,15 +88,16 @@ const team = [
 ];
 
 const sustainability = [
-  { title: 'Financial Sustainability', desc: 'Sustainable business through agricultural products, services and responsible financial management.', icon: TrendingUp },
-  { title: 'Institutional Sustainability', desc: 'Strong management systems, defined staff responsibilities and continuous development.', icon: Building2 },
-  { title: 'Market Sustainability', desc: 'Lasting relationships with farmers, groups, suppliers and stakeholders.', icon: Handshake },
-  { title: 'Environmental Sustainability', desc: 'Climate-smart practices, soil conservation, water harvesting and responsible product use.', icon: TreePine },
+  { title: 'Financial Sustainability', desc: 'Sustainable business through agricultural products, services and responsible financial management.', icon: TrendingUp, image: COMPANY_ACTIVITY_PHOTOS.shopDisplay },
+  { title: 'Institutional Sustainability', desc: 'Strong management systems, defined staff responsibilities and continuous development.', icon: Building2, image: COMPANY_ACTIVITY_PHOTOS.fieldLearning },
+  { title: 'Market Sustainability', desc: 'Lasting relationships with farmers, groups, suppliers and stakeholders.', icon: Handshake, image: COMPANY_ACTIVITY_PHOTOS.shopService },
+  { title: 'Environmental Sustainability', desc: 'Climate-smart practices, soil conservation, water harvesting and responsible product use.', icon: TreePine, image: COMPANY_ACTIVITY_PHOTOS.mulchedRows },
 ];
 
 const challenges = [
   'Limited access to improved and quality seeds',
   'Inadequate knowledge of modern crop production practices',
+  'Limited access to agricultural extension services and support',
   'Misuse of agrochemicals due to insufficient technical guidance',
   'High costs of agricultural products',
   'Unpredictable rainfall, drought and climate-related challenges',
@@ -243,44 +244,62 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
       </section>
 
       {/* Core Values */}
-      <section className="section-padding bg-white">
-        <div className="container-page">
+      <section className="section-padding relative isolate overflow-hidden bg-white">
+        <img src={COMPANY_ACTIVITY_PHOTOS.fieldVisit.src} alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover" loading="lazy" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-white/85 via-white/85 to-primary-50/80" aria-hidden="true" />
+        <div className="container-page relative">
           <SectionTitle
             eyebrow="Our Principles"
             title="Our Core Values"
             subtitle="The principles that guide how we conduct our business, serve customers and interact with agricultural communities."
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {values.map(({ icon: Icon, ...v }, i) => (
-              <div key={i} className="p-6 rounded-xl border-2 border-gray-100 hover:border-primary-300 hover:shadow-lg transition-all group">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-50 text-primary-700 transition-colors group-hover:bg-primary-700 group-hover:text-white">
-                  <Icon aria-hidden="true" className="h-6 w-6" />
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {values.map(({ icon: Icon, image, ...v }, i) => (
+              <article key={i} className="group overflow-hidden rounded-2xl border border-primary-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <figure className="relative h-36 overflow-hidden">
+                  <img src={image.src} alt="" aria-hidden="true" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary-950/60 to-transparent" aria-hidden="true" />
+                  <figcaption className="absolute bottom-3 left-3 right-3 text-xs font-medium text-white drop-shadow">{image.caption}</figcaption>
+                  <span className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-xl bg-white text-primary-700 shadow-md">
+                    <Icon aria-hidden="true" className="h-5 w-5" />
+                  </span>
+                </figure>
+                <div className="p-5">
+                  <h4 className="font-display text-sm font-bold text-primary-950">{v.title}</h4>
+                  <p className="mt-2 text-xs leading-relaxed text-gray-600">{v.desc}</p>
                 </div>
-                <h4 className="font-display font-bold text-gray-900 mb-2 text-sm">{v.title}</h4>
-                <p className="text-xs text-gray-600 leading-relaxed">{v.desc}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       {/* Approach */}
-      <section className="section-padding bg-gradient-to-br from-[#eef5f8] via-white to-primary-50">
+      <section className="section-padding relative isolate overflow-hidden bg-primary-50">
+        <img src={COMPANY_ACTIVITY_PHOTOS.greenhouseInterior.src} alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover" loading="lazy" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-[#eef5f8]/85 via-white/80 to-primary-50/85" aria-hidden="true" />
         <div className="container-page relative z-10">
           <SectionTitle
             eyebrow="How We Work"
             title="Our Approach to Agricultural Development"
             subtitle="Agricultural development requires an integrated approach. Products alone are not enough — our Products and Services connect agricultural resources with technical support, farmer education and market-oriented activities."
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {approach.map(({ icon: Icon, ...a }, i) => (
-              <div key={i} className="rounded-2xl border border-primary-100 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-white text-primary-700">
-                  <Icon aria-hidden="true" className="h-7 w-7" />
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {approach.map(({ icon: Icon, image, ...a }, i) => (
+              <article key={i} className="group overflow-hidden rounded-2xl border border-white bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <figure className="relative h-40 overflow-hidden">
+                  <img src={image.src} alt="" aria-hidden="true" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary-950/60 to-transparent" aria-hidden="true" />
+                  <figcaption className="absolute bottom-3 left-4 text-xs font-medium text-white drop-shadow">{image.caption}</figcaption>
+                  <span className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-xl bg-white text-primary-700 shadow-lg">
+                    <Icon aria-hidden="true" className="h-5 w-5" />
+                  </span>
+                </figure>
+                <div className="p-6">
+                  <h4 className="font-display font-bold text-primary-950">{a.title}</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-600">{a.desc}</p>
                 </div>
-                <h4 className="font-sans font-bold text-primary-950 mb-2">{a.title}</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">{a.desc}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
@@ -296,7 +315,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
                 Our Geographical Coverage
               </h2>
               <p className="text-gray-600 leading-relaxed mb-6">
-                The company information currently lists its main location in Kubala Trading Centre. Any additional outlets or production facilities are not advertised here until their operational status is confirmed.
+                Our main location is in Kubala Trading Centre. We also work in Uleppi Trading Centre in Madi-Okollo District and Lazeebu Trading Centre in Arua District. In Arua City, our farmer learning centre supports greenhouse production. Contact us to confirm directions and availability before travelling.
               </p>
               <div className="grid gap-3 sm:grid-cols-2">
                 {COMPANY.locations.map((location) => (
@@ -395,22 +414,31 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
       </section>
 
       {/* Sustainability */}
-      <section className="section-padding bg-white">
-        <div className="container-page">
+      <section className="section-padding relative isolate overflow-hidden bg-white">
+        <img src={COMPANY_ACTIVITY_PHOTOS.mulchedRows.src} alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover" loading="lazy" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-white/85 via-white/80 to-primary-50/85" aria-hidden="true" />
+        <div className="container-page relative">
           <SectionTitle
             eyebrow="Long-term Thinking"
             title="Our Commitment to Sustainability"
             subtitle="Agricultural development should benefit present communities while protecting the resources required by future generations."
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {sustainability.map(({ icon: Icon, ...s }, i) => (
-              <div key={i} className="p-6 rounded-xl bg-gradient-to-br from-gray-50 to-primary-50/30 border border-gray-100">
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-white text-primary-700">
-                  <Icon aria-hidden="true" className="h-7 w-7" />
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {sustainability.map(({ icon: Icon, image, ...s }, i) => (
+              <article key={i} className="group overflow-hidden rounded-2xl border border-primary-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <figure className="relative h-36 overflow-hidden">
+                  <img src={image.src} alt="" aria-hidden="true" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary-950/60 to-transparent" aria-hidden="true" />
+                  <figcaption className="absolute bottom-3 left-3 right-3 text-xs font-medium text-white drop-shadow">{image.caption}</figcaption>
+                  <span className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-xl bg-white text-primary-700 shadow-md">
+                    <Icon aria-hidden="true" className="h-5 w-5" />
+                  </span>
+                </figure>
+                <div className="p-5">
+                  <h4 className="font-display text-sm font-bold text-primary-950">{s.title}</h4>
+                  <p className="mt-2 text-xs leading-relaxed text-gray-600">{s.desc}</p>
                 </div>
-                <h4 className="font-display font-bold text-gray-900 mb-2 text-sm">{s.title}</h4>
-                <p className="text-xs text-gray-600 leading-relaxed">{s.desc}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
