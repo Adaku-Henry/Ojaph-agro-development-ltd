@@ -1,5 +1,6 @@
 import { Users, GraduationCap, Leaf, Sprout, Droplets, TrendingUp, MessageCircle, BookOpen, CheckCircle2, ArrowRight, Target, Heart, Globe, Lightbulb, Building2, Handshake } from 'lucide-react';
-import { BRAND_ASSETS, COMPANY, IMAGES, type PageId } from '@/data/company';
+import { BRAND_ASSETS, COMPANY, type PageId } from '@/data/company';
+import { COMPANY_ACTIVITY_PHOTOS } from '@/data/companyActivities';
 import { PageHero, SectionTitle, CTASection } from '@/components/ui';
 
 interface ServicesPageProps {
@@ -10,7 +11,7 @@ const services = [
   {
     icon: Users,
     title: 'Agricultural Extension & Consultancy',
-    image: IMAGES.caringCrops,
+    image: COMPANY_ACTIVITY_PHOTOS.tomatoInspection,
     desc: 'Agricultural guidance and advisory support to farmers on different aspects of crop production and farm management.',
     details: [
       'Guidance on selecting suitable crop varieties',
@@ -25,11 +26,11 @@ const services = [
   {
     icon: GraduationCap,
     title: 'Farmer Training & Capacity Building',
-    image: IMAGES.farmersRice,
+    image: COMPANY_ACTIVITY_PHOTOS.fieldLearning,
     desc: 'Training, sensitisation and practical learning activities that strengthen farmers\' ability to manage agricultural enterprises.',
     details: [
       'Good agricultural practices',
-      'Proper use and handling of agricultural inputs',
+      'Proper use and handling of agricultural products',
       'Safe handling and application of agrochemicals',
       'Soil fertility management',
       'Crop pest and disease management',
@@ -42,7 +43,7 @@ const services = [
   {
     icon: Leaf,
     title: 'Demonstration Gardens & Practical Learning',
-    image: IMAGES.nurseryWorker,
+    image: COMPANY_ACTIVITY_PHOTOS.vegetableBeds,
     desc: 'Opportunities for farmers to observe and learn how recommended agricultural practices can be applied in real farming situations.',
     details: [
       'Improved crop varieties',
@@ -57,7 +58,7 @@ const services = [
   {
     icon: Sprout,
     title: 'Agronomy & Crop Production Support',
-    image: IMAGES.plantingField,
+    image: COMPANY_ACTIVITY_PHOTOS.fieldWorker,
     desc: 'Technical guidance on the different stages of crop production, from land preparation to post-harvest handling.',
     details: [
       'Land preparation guidance',
@@ -74,7 +75,7 @@ const services = [
   {
     icon: Droplets,
     title: 'Climate-Smart Agriculture',
-    image: IMAGES.cornfieldSunset,
+    image: COMPANY_ACTIVITY_PHOTOS.mulchedRows,
     desc: 'Practical approaches that help farmers manage climate-related risks while protecting natural resources.',
     details: [
       'Promoting drought-tolerant crop varieties',
@@ -89,7 +90,7 @@ const services = [
   {
     icon: TrendingUp,
     title: 'Agricultural Market Linkages',
-    image: IMAGES.vegetablesMarket,
+    image: COMPANY_ACTIVITY_PHOTOS.shopDisplay,
     desc: 'Connecting farmers with agricultural market opportunities and improving their participation in value chains.',
     details: [
       'Providing information about potential produce markets',
@@ -103,12 +104,12 @@ const services = [
   {
     icon: MessageCircle,
     title: 'After-Sales Support & Customer Guidance',
-    image: IMAGES.farmerHands,
-    desc: 'Our relationship with customers should not end after the purchase of agricultural inputs.',
+    image: COMPANY_ACTIVITY_PHOTOS.shopService,
+    desc: 'Our relationship with customers should not end after they purchase an agricultural product.',
     details: [
       'Basic guidance on product use',
       'Information on product labels and instructions',
-      'Advice on appropriate storage of agricultural inputs',
+      'Advice on appropriate storage of agricultural products',
       'Guidance on safe handling of agrochemicals',
       'Responding to customer questions',
       'Directing customers to qualified technical assistance',
@@ -117,16 +118,16 @@ const services = [
   {
     icon: BookOpen,
     title: 'Internship & Practical Agricultural Learning',
-    image: IMAGES.nurseryTray,
+    image: COMPANY_ACTIVITY_PHOTOS.seedlingTrays,
     desc: 'Practical experience opportunities for students and aspiring agricultural professionals, subject to availability.',
     details: [
-      'Agricultural input management',
+      'Agricultural product management',
       'Basic crop production practices',
       'Farmer communication and extension activities',
       'Agricultural marketing',
       'Farm management',
       'Demonstration activities',
-      'Customer service in agricultural input businesses',
+      'Customer service in agricultural product businesses',
     ],
   },
 ];
@@ -149,7 +150,7 @@ const deliveryApproach = [
 ];
 
 const whyChoose = [
-  { icon: Target, title: 'Agricultural Focus', desc: 'Our activities are centred on agricultural inputs and farmer development.' },
+  { icon: Target, title: 'Agricultural Focus', desc: 'Our activities are centred on agricultural development and farmer support.' },
   { icon: BookOpen, title: 'Practical Guidance', desc: 'We emphasise useful agricultural knowledge and application.' },
   { icon: Heart, title: 'Customer Commitment', desc: 'We value farmers and seek to understand their needs.' },
   { icon: Leaf, title: 'Sustainable Farming', desc: 'We encourage responsible use of agricultural resources.' },
@@ -163,7 +164,8 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
       <PageHero
         title="Our Services"
         subtitle="Agricultural services that support better farming. We provide knowledge, guidance and practical support to help farmers improve crop production, manage challenges and strengthen livelihoods."
-        image={IMAGES.farmersWheat}
+        image={COMPANY_ACTIVITY_PHOTOS.fieldVisit.src}
+        imageCaption="Company activity · Field visit"
         breadcrumb="Home / Services"
       />
 
@@ -186,9 +188,9 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
             {services.map((service, i) => (
               <div key={i} className="card group overflow-hidden">
                 <div className="relative h-56 overflow-hidden">
-                  <img src={service.image} alt="" aria-hidden="true" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <img src={service.image.src} alt="" aria-hidden="true" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary-900/80 to-transparent" />
-                  <span className="absolute right-3 top-3 rounded bg-black/60 px-2.5 py-1 text-xs text-white">Illustrative photo</span>
+                  <span className="absolute right-3 top-3 rounded bg-black/60 px-2.5 py-1 text-xs text-white">Company activity · {service.image.caption}</span>
                   <div className="absolute bottom-4 left-4 flex items-center gap-3">
                     <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-white/90 backdrop-blur">
                       <service.icon aria-hidden="true" className="h-7 w-7 text-primary-700" />
@@ -243,21 +245,19 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
       </section>
 
       {/* Delivery approach */}
-      <section className="section-padding bg-primary-900 relative overflow-hidden">
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl" />
+      <section className="section-padding bg-gradient-to-br from-[#eef5f8] via-white to-primary-50">
         <div className="container-page relative z-10">
           <SectionTitle
-            light
             eyebrow="Our Approach"
             title="How We Deliver Our Services"
             subtitle="We aim to make agricultural support practical, accessible and relevant to farmers' needs."
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {deliveryApproach.map((step, i) => (
-              <div key={i} className="bg-white/5 backdrop-blur border border-primary-700/30 rounded-xl p-6">
-                <p className="font-display text-3xl font-bold text-accent-400 mb-3">0{i + 1}</p>
-                <h4 className="font-display font-bold text-white text-sm mb-2">{step.title}</h4>
-                <p className="text-xs text-primary-200 leading-relaxed">{step.desc}</p>
+              <div key={i} className="rounded-2xl border border-primary-100 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
+                <p className="mb-3 font-sans text-3xl font-extrabold text-accent-600">0{i + 1}</p>
+                <h4 className="mb-2 font-sans text-sm font-bold text-primary-950">{step.title}</h4>
+                <p className="text-xs leading-relaxed text-gray-600">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -315,7 +315,7 @@ export default function ServicesPage({ onNavigate }: ServicesPageProps) {
 
       <CTASection
         title="Let Us Support Your Agricultural Journey"
-        description="Whether you need agricultural inputs, farming advice, farmer training or opportunities for collaboration, our team welcomes your enquiry."
+        description="Whether you are looking for agricultural products, farming advice, farmer training or opportunities for collaboration, our team welcomes your enquiry."
         primaryLabel="Request Our Services"
         onPrimary={() => onNavigate('contact')}
         secondaryLabel="View Our Products"

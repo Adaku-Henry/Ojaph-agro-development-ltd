@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Sprout, GraduationCap, Leaf, TrendingUp, BookOpen, MapPin, Calendar, ArrowRight, CheckCircle2, Image as ImageIcon, Users } from 'lucide-react';
-import { IMAGES, type PageId } from '@/data/company';
+import { type PageId } from '@/data/company';
+import { COMPANY_ACTIVITY_GALLERY, COMPANY_ACTIVITY_PHOTOS } from '@/data/companyActivities';
 import { PageHero, SectionTitle, CTASection } from '@/components/ui';
 
 interface ProjectsPageProps {
@@ -19,7 +20,7 @@ const focusAreas = [
 const projects = [
   {
     title: 'Agricultural Demonstration Gardens',
-    image: IMAGES.cornfield,
+    image: COMPANY_ACTIVITY_PHOTOS.vegetableBeds,
     location: 'To be confirmed',
     status: 'Planned',
     desc: 'Demonstration gardens providing farmers with practical opportunities to learn about improved agricultural practices. Farmers can observe different crop varieties, planting methods, spacing, fertilizer management and general crop care.',
@@ -27,23 +28,23 @@ const projects = [
   },
   {
     title: 'Farmer Training & Capacity Building',
-    image: IMAGES.farmersRice,
+    image: COMPANY_ACTIVITY_PHOTOS.fieldDemonstration,
     location: 'West Nile region',
     status: 'Planned',
     desc: 'Improving agricultural knowledge and practical farming skills through training covering crop production, input use, pest management, soil fertility, harvesting and post-harvest handling.',
     activities: ['Farmer sensitisation meetings', 'Practical crop production training', 'Safe agrochemical handling education', 'Soil fertility management sessions', 'Post-harvest management education'],
   },
   {
-    title: 'Improved Agricultural Input Access',
-    image: IMAGES.seedPackets,
+    title: 'Access to Agricultural Products',
+    image: COMPANY_ACTIVITY_PHOTOS.productShopVisit,
     location: 'Kubala, Terego District',
     status: 'Ongoing',
-    desc: 'Making relevant agricultural inputs accessible to farmers while encouraging responsible product selection and use through our agricultural input supply operations.',
-    activities: ['Supplying agricultural inputs', 'Providing basic product information', 'Guiding customers on safe handling', 'Promoting appropriate input selection', 'Supporting farmers with product enquiries'],
+    desc: 'Connecting farmers with relevant agricultural products and clear product information while encouraging responsible selection and use.',
+    activities: ['Connecting farmers with agricultural products', 'Providing basic product information', 'Guiding customers on safe handling', 'Promoting appropriate product selection', 'Supporting farmers with product enquiries'],
   },
   {
     title: 'Climate-Smart Agriculture Promotion',
-    image: IMAGES.cornfieldSunset,
+    image: COMPANY_ACTIVITY_PHOTOS.mulchedRows,
     location: 'To be confirmed',
     status: 'Planned',
     desc: 'Encouraging farming practices that support agricultural productivity, climate resilience and sustainable natural resource management.',
@@ -51,7 +52,7 @@ const projects = [
   },
   {
     title: 'Agricultural Market Linkages',
-    image: IMAGES.vegetablesMarket,
+    image: COMPANY_ACTIVITY_PHOTOS.shopDisplay,
     location: 'To be confirmed',
     status: 'Planned',
     desc: 'Improving farmers\' awareness of agricultural marketing opportunities and encouraging better produce handling and market preparation.',
@@ -59,11 +60,11 @@ const projects = [
   },
   {
     title: 'Internship & Practical Learning',
-    image: IMAGES.nurseryTray,
+    image: COMPANY_ACTIVITY_PHOTOS.greenhouseNursery,
     location: 'Kubala, Terego District',
     status: 'Planned',
     desc: 'Practical agricultural learning opportunities for students to connect classroom knowledge with real farming and agribusiness activities.',
-    activities: ['Agricultural input management', 'Crop production exposure', 'Farmer communication', 'Agricultural marketing', 'Farm management and extension'],
+    activities: ['Agricultural product management', 'Crop production exposure', 'Farmer communication', 'Agricultural marketing', 'Farm management and extension'],
   },
 ];
 
@@ -72,25 +73,17 @@ const projectSections = [
   { status: 'Planned', title: 'Planned Initiatives' },
 ] as const;
 
-const galleryCategories = ['All', 'Agricultural Input Supply', 'Farmer Training', 'Demonstration Gardens', 'Crop Production', 'Community Engagements'];
-
-const galleryImages = [
-  { src: IMAGES.seedPackets, caption: 'Seed packets', category: 'Agricultural Input Supply' },
-  { src: IMAGES.farmersRice, caption: 'Farmers in a field', category: 'Farmer Training' },
-  { src: IMAGES.cornfield, caption: 'Maize field', category: 'Demonstration Gardens' },
-  { src: IMAGES.farmerHarvest, caption: 'Produce harvesting', category: 'Crop Production' },
-  { src: IMAGES.farmerInspect, caption: 'Crop inspection', category: 'Crop Production' },
-  { src: IMAGES.fertilizerHands, caption: 'Fertilizer application', category: 'Demonstration Gardens' },
-  { src: IMAGES.sprayer, caption: 'Agricultural spraying', category: 'Farmer Training' },
-  { src: IMAGES.vegetablesBasket, caption: 'Harvested vegetables', category: 'Crop Production' },
-  { src: IMAGES.nurseryWorker, caption: 'Plant nursery work', category: 'Demonstration Gardens' },
-  { src: IMAGES.farmerHands, caption: 'Farmer field support', category: 'Community Engagements' },
-  { src: IMAGES.plantingSeeds, caption: 'Seed planting', category: 'Farmer Training' },
-  { src: IMAGES.beansBasket, caption: 'Harvested beans', category: 'Crop Production' },
+const galleryCategories = [
+  'All',
+  'Crop Production',
+  'Farmer Training',
+  'Nursery & Greenhouse',
+  'Products & Customer Service',
+  'Livestock',
 ];
 
 const impact = [
-  'Supporting access to agricultural inputs',
+  'Connecting farmers with agricultural products',
   'Strengthening agricultural knowledge among farmers',
   'Building understanding of crop production practices',
   'Promoting sustainable farming',
@@ -100,14 +93,16 @@ const impact = [
 ];
 
 const updates = [
-  { title: 'Preparing for the Next Planting Season', date: 'Seasonal', location: 'West Nile', desc: 'Agricultural advisory and input availability information for upcoming planting activities.', status: 'Upcoming' },
+  { title: 'Preparing for the Next Planting Season', date: 'Seasonal', location: 'West Nile', desc: 'Agricultural advice and product information for upcoming planting activities.', status: 'Upcoming' },
   { title: 'Farmer Training on Safe Agrochemical Use', date: 'To be announced', location: 'Terego District', desc: 'Practical training sessions on responsible handling and application of agricultural chemicals.', status: 'Planned' },
   { title: 'Demonstration Garden Establishment', date: 'To be announced', location: 'To be confirmed', desc: 'Setting up demonstration plots for practical farmer learning and crop comparison.', status: 'Planned' },
 ];
 
 export default function ProjectsPage({ onNavigate }: ProjectsPageProps) {
   const [activeCategory, setActiveCategory] = useState('All');
-  const filteredImages = activeCategory === 'All' ? galleryImages : galleryImages.filter(img => img.category === activeCategory);
+  const filteredImages = activeCategory === 'All'
+    ? COMPANY_ACTIVITY_GALLERY
+    : COMPANY_ACTIVITY_GALLERY.filter((img) => img.category === activeCategory);
 
   const statusColors: Record<string, string> = {
     'Ongoing': 'bg-primary-100 text-primary-800',
@@ -120,8 +115,9 @@ export default function ProjectsPage({ onNavigate }: ProjectsPageProps) {
     <div>
       <PageHero
         title="Projects & Gallery"
-        subtitle="Explore ongoing and planned agricultural initiatives. Stock images are marked as illustrative and do not document OJAPH activities."
-        image={IMAGES.farmersWheat}
+        subtitle="Explore company activity photographs alongside ongoing and planned agricultural initiatives."
+        image={COMPANY_ACTIVITY_PHOTOS.cassavaFieldTeam.src}
+        imageCaption="Company activity · Cassava field"
         breadcrumb="Home / Projects & Gallery"
       />
 
@@ -156,7 +152,7 @@ export default function ProjectsPage({ onNavigate }: ProjectsPageProps) {
             subtitle="Ongoing and planned initiatives are labeled by status. No completed activities are presented without verified supporting records."
           />
           <div className="mb-8 rounded-xl border border-primary-200 bg-primary-50 p-5 text-sm leading-relaxed text-gray-700">
-            <strong>Completed activities:</strong> No completed project records with verified dates, locations and genuine photographs have been supplied for publication.
+            <strong>Photo note:</strong> These photographs come from the supplied company activities archive and may not correspond to each named initiative below. Captions describe visible scenes only; dates, specific locations and measured outcomes have not been provided.
           </div>
           <div className="space-y-10">
             {projectSections.map(({ status, title }) => (
@@ -166,9 +162,9 @@ export default function ProjectsPage({ onNavigate }: ProjectsPageProps) {
                   {projects.filter((project) => project.status === status).map((project) => (
                     <article key={project.title} className="card group">
                       <div className="relative h-52 overflow-hidden">
-                        <img src={project.image} alt="" aria-hidden="true" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                      <img src={project.image.src} alt="" aria-hidden="true" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                        <span className="absolute bottom-3 left-3 rounded bg-black/60 px-2.5 py-1 text-xs font-medium text-white">Illustrative image</span>
+                      <span className="absolute bottom-3 left-3 rounded bg-black/60 px-2.5 py-1 text-xs font-medium text-white">Company activity photo</span>
                         <span className={`absolute right-3 top-3 rounded-full px-3 py-1 text-xs font-semibold ${statusColors[project.status]}`}>
                           {project.status}
                         </span>
@@ -206,9 +202,9 @@ export default function ProjectsPage({ onNavigate }: ProjectsPageProps) {
       <section className="section-padding bg-white">
         <div className="container-page">
           <SectionTitle
-            eyebrow="Visual Journey"
-            title="Photo Gallery"
-            subtitle="Illustrative agricultural stock photographs only. These images do not document OJAPH activities."
+            eyebrow="From the company archive"
+            title="Company Activities Gallery"
+            subtitle="Real photographs from OJAPH crop production, training, nursery work, customer service and other activities."
           />
           {/* Category filter */}
           <div className="flex flex-wrap gap-2 justify-center mb-8">
@@ -228,22 +224,30 @@ export default function ProjectsPage({ onNavigate }: ProjectsPageProps) {
           </div>
           {/* Gallery grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredImages.map((img, i) => (
-              <div key={i} className="group relative rounded-xl overflow-hidden shadow-md cursor-pointer">
-                <img src={img.src} alt={`Illustrative stock image: ${img.caption}`} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-950/80 via-primary-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="absolute left-3 top-3 rounded bg-black/60 px-2.5 py-1 text-xs font-medium text-white">Illustrative</span>
-                <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <p className="text-white text-sm font-medium">Illustrative image: {img.caption}</p>
-                  <p className="text-primary-200 text-xs">{img.category}</p>
-                </div>
-              </div>
+            {filteredImages.map((img) => (
+              <figure key={img.src} className="group relative overflow-hidden rounded-xl shadow-md">
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className={`h-64 w-full object-cover transition-transform duration-500 ${
+                    img.cropThirdPartySignage ? 'origin-right scale-[2]' : 'group-hover:scale-105'
+                  }`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary-950/85 via-primary-900/15 to-transparent" aria-hidden="true" />
+                <span className="absolute left-3 top-3 rounded bg-primary-950/75 px-2.5 py-1 text-xs font-medium text-white">OJAPH activity</span>
+                <figcaption className="absolute bottom-0 left-0 right-0 p-4">
+                  <p className="text-sm font-semibold text-white">{img.caption}</p>
+                  <p className="mt-1 text-xs text-primary-100">{img.category}</p>
+                </figcaption>
+              </figure>
             ))}
           </div>
           <div className="mt-8 bg-accent-50 border-l-4 border-accent-500 rounded-r-lg p-4 flex items-start gap-3 max-w-2xl mx-auto">
             <ImageIcon className="w-5 h-5 text-accent-600 shrink-0 mt-0.5" />
             <p className="text-sm text-accent-800">
-              These are stock photographs for illustration only, not evidence of OJAPH activities. Replace them with genuine company photographs only when the activity, date, location and permissions have been verified.
+              These photographs come from the company activities archive. Captions describe visible scenes only; a visible event banner or logo does not imply an official partnership, and dates, locations and outcomes are not inferred.
             </p>
           </div>
         </div>
@@ -301,14 +305,13 @@ export default function ProjectsPage({ onNavigate }: ProjectsPageProps) {
       </section>
 
       {/* Work with us */}
-      <section className="py-16 bg-primary-900 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl" />
-        <div className="container-page relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <Users aria-hidden="true" className="mx-auto mb-4 h-10 w-10 text-accent-300" />
-            <h2 className="font-display text-3xl font-bold text-white mb-4">Let Us Work Together for Agricultural Development</h2>
-            <p className="text-primary-100 leading-relaxed mb-8">
-              We welcome enquiries from individuals, farmer groups, institutions and organisations interested in agricultural development. We are interested in discussions around farmer education, input supply, demonstration activities, climate-smart practices, consultancy, market development and student internship opportunities.
+      <section className="section-padding bg-white">
+        <div className="container-page">
+          <div className="rounded-[2rem] border border-primary-100 bg-gradient-to-br from-[#edf5f8] via-white to-primary-50 p-8 text-center shadow-sm sm:p-12">
+            <Users aria-hidden="true" className="mx-auto mb-4 h-10 w-10 text-primary-700" />
+            <h2 className="font-sans text-3xl font-extrabold text-primary-950 mb-4">Let Us Work Together for Agricultural Development</h2>
+            <p className="mx-auto max-w-3xl text-gray-700 leading-relaxed mb-8">
+              We welcome enquiries from individuals, farmer groups, institutions and organisations interested in agricultural development. We are interested in discussions around farmer education, agricultural products, demonstration activities, climate-smart practices, market development and student internship opportunities.
             </p>
             <button onClick={() => onNavigate('partners')} className="btn-accent">
               Partner With Us <ArrowRight className="w-4 h-4" />

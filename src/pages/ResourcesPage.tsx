@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BookOpen, Leaf, Sprout, FlaskConical, Shield, Droplets, Package, TrendingUp, Download, FileText, ChevronDown, ArrowRight, Lightbulb, ExternalLink, HelpCircle } from 'lucide-react';
-import { BRAND_ASSETS, COMPANY, IMAGES, type PageId } from '@/data/company';
+import { BRAND_ASSETS, COMPANY, type PageId } from '@/data/company';
+import { COMPANY_ACTIVITY_PHOTOS } from '@/data/companyActivities';
 import { PageHero, SectionTitle, CTASection } from '@/components/ui';
 
 interface ResourcesPageProps {
@@ -21,7 +22,7 @@ const resourceCategories = [
 const guides = [
   {
     title: 'How to Establish a Successful Maize Farm',
-    image: IMAGES.cornfield,
+    image: COMPANY_ACTIVITY_PHOTOS.fieldVisit,
     intro: 'Maize is an important food and commercial crop in Uganda. Successful production requires proper planning, good-quality seeds, suitable land preparation and effective crop management.',
     steps: [
       { title: 'Select a suitable maize variety', desc: 'Consider maturity period, rainfall suitability, disease resistance, yield potential and certified seed availability. Purchase from reputable suppliers.' },
@@ -35,7 +36,7 @@ const guides = [
   },
   {
     title: 'How to Grow Beans Successfully',
-    image: IMAGES.beansBasket,
+    image: COMPANY_ACTIVITY_PHOTOS.fieldWorker,
     intro: 'Beans are an important source of protein and income. They can be grown for household consumption and commercial markets.',
     steps: [
       { title: 'Choose suitable seed', desc: 'Select healthy, quality seed of a variety suitable for local conditions.' },
@@ -50,7 +51,7 @@ const guides = [
   },
   {
     title: 'Vegetable Production for Household Income',
-    image: IMAGES.vegetablesBasket,
+    image: COMPANY_ACTIVITY_PHOTOS.tomatoInspection,
     intro: 'Vegetable farming provides opportunities for food production, nutrition improvement and income generation.',
     steps: [
       { title: 'Select the vegetable crop', desc: 'Choose based on climate, soil, water availability, market demand and household preferences.' },
@@ -121,7 +122,8 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       <PageHero
         title="Farmer Resources Centre"
         subtitle="Knowledge and information for better farming. Practical agricultural guides, educational materials and advice to help farmers improve their activities."
-        image={IMAGES.greenPlant}
+        image={COMPANY_ACTIVITY_PHOTOS.mulchedRows.src}
+        imageCaption="Company activity · Mulched crop rows"
         breadcrumb="Home / Farmer Resources"
       />
 
@@ -172,9 +174,9 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
               <div key={i} className="bg-white rounded-2xl shadow-md overflow-hidden">
                 <div className="grid lg:grid-cols-3 gap-0">
                   <div className="relative h-64 lg:h-auto overflow-hidden">
-                    <img src={guide.image} alt="" aria-hidden="true" className="w-full h-full object-cover" />
+                    <img src={guide.image.src} alt="" aria-hidden="true" className="w-full h-full object-cover" loading="lazy" />
                     <div className="absolute inset-0 bg-gradient-to-t from-primary-900/50 to-transparent lg:bg-gradient-to-r" />
-                    <span className="absolute right-3 top-3 rounded bg-black/60 px-2.5 py-1 text-xs text-white">Illustrative photo</span>
+                    <span className="absolute right-3 top-3 rounded bg-black/60 px-2.5 py-1 text-xs text-white">Company activity · {guide.image.caption}</span>
                   </div>
                   <div className="lg:col-span-2 p-6 md:p-8">
                     <div className="flex items-center gap-2 mb-3">
@@ -248,8 +250,8 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
             </div>
             <div>
               <div className="relative rounded-2xl overflow-hidden shadow-xl mb-6">
-                <img src={IMAGES.fertilizerHands} alt="" aria-hidden="true" className="w-full h-64 object-cover" />
-                <span className="absolute right-3 top-3 rounded bg-black/60 px-2.5 py-1 text-xs text-white">Illustrative photo</span>
+                <img src={COMPANY_ACTIVITY_PHOTOS.vegetableBeds.src} alt="" aria-hidden="true" className="w-full h-64 object-cover" loading="lazy" />
+                <span className="absolute right-3 top-3 rounded bg-black/60 px-2.5 py-1 text-xs text-white">Company activity · Vegetable garden beds</span>
               </div>
               <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
                 <table className="w-full text-sm">
@@ -451,23 +453,22 @@ export default function ResourcesPage({ onNavigate }: ResourcesPageProps) {
       </section>
 
       {/* Ask a question */}
-      <section className="py-16 bg-primary-900 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl" />
-        <div className="container-page relative z-10">
-          <div className="max-w-2xl mx-auto text-center">
-            <HelpCircle className="w-12 h-12 text-accent-400 mx-auto mb-4" />
-            <h2 className="font-display text-3xl font-bold text-white mb-4">Do You Have a Farming Challenge?</h2>
-            <p className="text-primary-100 leading-relaxed mb-8">
+      <section className="section-padding bg-white">
+        <div className="container-page">
+          <div className="mx-auto max-w-4xl rounded-[2rem] border border-primary-100 bg-gradient-to-br from-[#edf5f8] via-white to-primary-50 p-8 text-center shadow-sm sm:p-12">
+            <HelpCircle className="mx-auto mb-4 h-12 w-12 text-primary-700" />
+            <h2 className="font-sans text-3xl font-extrabold text-primary-950 mb-4">Do You Have a Farming Challenge?</h2>
+            <p className="text-gray-700 leading-relaxed mb-8">
               Every farmer experiences different agricultural challenges. Whether you are struggling with poor germination, crop diseases, declining soil fertility, pest attacks or post-harvest handling, we encourage you to seek appropriate information before making important decisions.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto mb-6">
-              <a href={`tel:${COMPANY.phone1.replace(/\s/g, '')}`} className="flex items-center justify-center gap-2 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+              <a href={`tel:${COMPANY.phone1.replace(/\s/g, '')}`} className="flex items-center justify-center gap-2 rounded-xl border border-primary-100 bg-white p-4 shadow-sm transition-all hover:border-accent-300 hover:shadow-md">
                 <img src={BRAND_ASSETS.phone} alt="" aria-hidden="true" className="h-7 w-7 object-contain" />
-                <span className="text-sm font-semibold text-white">{COMPANY.phone1}</span>
+                <span className="text-sm font-semibold text-primary-950">{COMPANY.phone1}</span>
               </a>
-              <a href={`mailto:${COMPANY.email}`} className="flex items-center justify-center gap-2 p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+              <a href={`mailto:${COMPANY.email}`} className="flex items-center justify-center gap-2 rounded-xl border border-primary-100 bg-white p-4 shadow-sm transition-all hover:border-accent-300 hover:shadow-md">
                 <img src={BRAND_ASSETS.email} alt="" aria-hidden="true" className="h-7 w-7 object-contain" />
-                <span className="text-sm font-semibold text-white">Email Us</span>
+                <span className="text-sm font-semibold text-primary-950">Email Us</span>
               </a>
             </div>
             <button onClick={() => onNavigate('contact')} className="btn-accent">

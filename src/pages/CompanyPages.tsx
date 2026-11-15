@@ -8,6 +8,7 @@ import {
   Users,
 } from 'lucide-react';
 import { BRAND_ASSETS, COMPANY, COMPANY_MAPS, IMAGES, type PageId } from '@/data/company';
+import { COMPANY_ACTIVITY_PHOTOS } from '@/data/companyActivities';
 import { CTASection, PageHero, SectionTitle } from '@/components/ui';
 import WhatsAppLogo from '@/components/WhatsAppLogo';
 
@@ -42,7 +43,8 @@ export function PartnersPage({ onNavigate }: NavigateProps) {
       <PageHero
         title="Growing Agriculture Through Partnership"
         subtitle="We welcome conversations with farmers, community organizations, suppliers and institutions working to strengthen agriculture in West Nile."
-        image={IMAGES.handshake}
+        image={COMPANY_ACTIVITY_PHOTOS.fieldVisit.src}
+        imageCaption="Company activity · Field visit"
         breadcrumb="Home / Partners"
       />
       <section className="section-padding bg-white">
@@ -113,7 +115,8 @@ export function ContactPage() {
       <PageHero
         title="Let’s Talk Agriculture"
         subtitle="Ask about product availability, agricultural support, training or a potential collaboration. Our team is ready to hear from you."
-        image={IMAGES.twoFarmers}
+        image={COMPANY_ACTIVITY_PHOTOS.shopService.src}
+        imageCaption="Company activity · Customer service"
         breadcrumb="Home / Contact Us"
       />
       <section className="section-padding bg-gray-50">
@@ -270,7 +273,8 @@ export function FAQPage({ onNavigate }: NavigateProps) {
       <PageHero
         title="Frequently Asked Questions"
         subtitle="Quick answers about our products, services and how to get in touch."
-        image={IMAGES.farmerInspect}
+        image={COMPANY_ACTIVITY_PHOTOS.tomatoInspection.src}
+        imageCaption="Company activity · Crop inspection"
         breadcrumb="Home / FAQs"
       />
       <section className="section-padding bg-white">

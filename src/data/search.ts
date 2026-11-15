@@ -23,5 +23,5 @@ export const SEARCH_ENTRIES: SearchEntry[] = [
   { title: 'Post-harvest handling', description: 'Guidance on harvesting, storage and reducing post-harvest losses.', keywords: 'resources postharvest harvest storage drying losses grain', page: 'resources' },
   { title: 'Frequently asked questions', description: 'Answers about products, location, services and contacting OJAPH.', keywords: 'faq FAQs questions answers prices stock location contact delivery', page: 'faq' },
   { title: 'Contact OJAPH', description: 'Contact details and the website enquiry email handoff.', keywords: 'contact email phone telephone WhatsApp enquiry message', page: 'contact' },
-  { title: 'Projects and illustrative gallery', description: 'View proposed initiatives and stock images clearly labeled as illustrative.', keywords: 'projects gallery planned ongoing photographs pictures activities initiatives', page: 'projects' },
+  { title: 'Projects and company activities gallery', description: 'View company activity photographs alongside ongoing and planned initiatives.', keywords: 'projects gallery planned ongoing photographs pictures activities initiatives', page: 'projects' },
 ];

@@ -33,14 +33,14 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-white font-semibold rounded-lg transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-white font-semibold rounded-full transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5;
     background-color: var(--color-brand);
   }
   .btn-primary:hover {
     background-color: #256528;
   }
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-primary-800 font-semibold rounded-lg border border-primary-300 transition-all duration-300;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-primary-800 font-semibold rounded-full border border-primary-300 transition-all duration-300;
   }
   .btn-secondary:hover {
     background-color: var(--color-brand);
@@ -48,7 +48,7 @@
     color: #fff;
   }
   .btn-accent {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-white font-semibold rounded-lg transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-white font-semibold rounded-full transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5;
     background-color: var(--color-accent);
   }
   .btn-accent:hover {
@@ -61,7 +61,7 @@
     @apply py-16 md:py-24;
   }
   .card {
-    @apply bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden;
+    @apply bg-white rounded-2xl border border-gray-200 shadow-sm transition-all duration-300 overflow-hidden hover:-translate-y-1 hover:border-primary-200 hover:shadow-xl;
   }
   .input-field {
     @apply w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200 outline-none transition-all duration-200;

@@ -19,7 +19,7 @@ export default function Footer({ onNavigate }: FooterProps) {
           <div className="lg:col-span-1">
             <img src={BRAND_ASSETS.logo} alt="OJAPH Agro Development Limited" className="mb-4 h-20 w-40 rounded-lg bg-white object-contain" />
             <p className="text-sm text-primary-100 leading-relaxed mb-4">
-              {COMPANY.slogan}. We are committed to supporting farmers through agricultural input supply, extension services, farmer training and sustainable agricultural development.
+              {COMPANY.slogan}. We are an agricultural company supporting farmers through our products, agricultural services, farmer training and sustainable development.
             </p>
             <div className="flex gap-3">
               <a href={`https://wa.me/${COMPANY.whatsapp}`} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-primary-800 hover:bg-primary-700 flex items-center justify-center transition-colors">

@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react';
+import { COMPANY } from '@/data/company';
 
 interface SectionTitleProps {
   eyebrow?: string;
@@ -10,31 +11,24 @@ interface SectionTitleProps {
 
 export function SectionTitle({ eyebrow, title, subtitle, center = true, light = false }: SectionTitleProps) {
   return (
-    <div
-      className={`${center ? 'text-center mx-auto' : ''} relative isolate max-w-3xl mb-12 rounded-2xl p-6 md:p-8`}
-      style={{
-        backgroundImage: light
-          ? 'linear-gradient(120deg, #1b4d20, #256528)'
-          : 'linear-gradient(120deg, #ffffff, #e8f5e9)',
-        border: light ? '1px solid rgba(255,255,255,.12)' : '1px solid #d8edda',
-        boxShadow: light ? '0 12px 28px rgba(18,56,23,.12)' : '0 10px 24px rgba(27,77,32,.05)',
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-      }}
-    >
+    <div className={`${center ? 'mx-auto text-center' : ''} relative mb-12 max-w-4xl`}>
       {eyebrow && (
-        <p className={`text-sm font-semibold uppercase tracking-wider mb-3 ${light ? 'text-accent-300' : 'text-primary-600'}`}>
+        <p className={`mb-4 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] ${
+          light ? 'border border-white/20 bg-white/10 text-accent-300' : 'border border-accent-200 bg-accent-50 text-accent-700'
+        }`}>
+          <span className={`h-2 w-2 rounded-full ${light ? 'bg-accent-300' : 'bg-accent-500'}`} aria-hidden="true" />
           {eyebrow}
         </p>
       )}
-      <h2 className={`font-display text-3xl md:text-4xl font-bold leading-tight ${light ? 'text-white' : 'text-gray-900'}`}>
+      <h2 className={`font-sans text-3xl font-extrabold leading-tight tracking-tight md:text-4xl lg:text-5xl ${light ? 'text-white' : 'text-primary-950'}`}>
         {title}
       </h2>
       {subtitle && (
-        <p className={`mt-4 text-base md:text-lg leading-relaxed ${light ? 'text-primary-100' : 'text-gray-600'}`}>
+        <p className={`mx-auto mt-4 max-w-3xl text-base leading-relaxed md:text-lg ${light ? 'text-primary-100' : 'text-gray-600'}`}>
           {subtitle}
         </p>
       )}
+      <div className={`mt-5 h-1 w-16 rounded-full bg-accent-500 ${center ? 'mx-auto' : ''}`} aria-hidden="true" />
     </div>
   );
 }
@@ -43,33 +37,41 @@ interface PageHeroProps {
   title: string;
   subtitle?: string;
   image: string;
+  imageCaption?: string;
   breadcrumb?: string;
   children?: ReactNode;
 }
 
-export function PageHero({ title, subtitle, image, breadcrumb, children }: PageHeroProps) {
+export function PageHero({ title, subtitle, image, imageCaption = 'Illustrative photo', breadcrumb, children }: PageHeroProps) {
   return (
-    <section className="relative min-h-[45vh] flex items-center overflow-hidden">
-      <div className="absolute inset-0">
-        <img src={image} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary-950/90 via-primary-900/80 to-primary-800/60" />
-        <span className="absolute bottom-3 right-3 z-10 rounded bg-black/60 px-2.5 py-1 text-xs text-white">Illustrative photo</span>
-      </div>
-      <div className="container-page relative z-10 py-16">
-        <div className="max-w-3xl rounded-2xl border border-white/15 bg-primary-950/25 p-6 shadow-2xl backdrop-blur-[2px] sm:p-8">
-        {breadcrumb && (
-          <p className="mb-4 inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-accent-200 animate-fade-in">{breadcrumb}</p>
-        )}
-        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight animate-fade-up">
-          {title}
-        </h1>
-        {subtitle && (
-          <p className="mt-5 text-lg md:text-xl text-primary-100 max-w-2xl leading-relaxed animate-fade-up" style={{ animationDelay: '0.1s' }}>
-            {subtitle}
-          </p>
-        )}
-        {children}
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#eef5f8] via-white to-primary-50">
+      <div className="pointer-events-none absolute -left-24 -top-28 h-72 w-72 rounded-full bg-accent-100/60 blur-3xl" />
+      <div className="container-page relative grid min-h-[420px] items-center gap-8 py-12 md:py-16 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="relative z-10 max-w-2xl">
+          {breadcrumb && (
+            <p className="mb-5 inline-flex items-center rounded-full bg-accent-500 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-white shadow-sm">
+              {breadcrumb}
+            </p>
+          )}
+          <h1 className="font-sans text-4xl font-extrabold leading-tight tracking-tight text-primary-950 md:text-5xl lg:text-6xl">
+            {title}
+          </h1>
+          {subtitle && (
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-gray-700 md:text-xl">
+              {subtitle}
+            </p>
+          )}
+          {children}
+          <div className="mt-7 h-1.5 w-24 rounded-full bg-accent-500" aria-hidden="true" />
         </div>
+        <figure className="relative min-h-[280px] overflow-hidden rounded-[2rem] border-4 border-white shadow-xl sm:min-h-[360px] lg:min-h-[390px]">
+          <img src={image} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" fetchPriority="high" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary-950/30 via-transparent to-transparent" aria-hidden="true" />
+          <figcaption className="absolute bottom-4 right-4 rounded-full bg-primary-950/70 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm">
+            {imageCaption}
+          </figcaption>
+          <span className="absolute bottom-0 left-0 h-2 w-28 rounded-tr-full bg-accent-500" aria-hidden="true" />
+        </figure>
       </div>
     </section>
   );
@@ -86,20 +88,22 @@ interface CTASectionProps {
 
 export function CTASection({ title, description, primaryLabel, onPrimary, secondaryLabel, onSecondary }: CTASectionProps) {
   return (
-    <section
-      className="relative overflow-hidden bg-primary-800"
-      style={{ backgroundImage: 'linear-gradient(115deg, #2e7d32, #1b4d20)' }}
-    >
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-400/10 rounded-full blur-3xl" />
-      <div className="container-page relative z-10 py-16 md:py-20 text-center">
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">{title}</h2>
-        <p className="text-primary-100 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">{description}</p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button onClick={onPrimary} className="btn-accent">{primaryLabel}</button>
+    <section className="bg-white py-8 md:py-12">
+      <div className="container-page">
+        <div className="relative isolate overflow-hidden rounded-[2rem] border border-primary-100 bg-gradient-to-br from-[#edf5f8] via-white to-primary-50 px-6 py-12 text-center shadow-sm sm:px-10 md:py-16">
+          <div className="pointer-events-none absolute -right-20 -top-20 -z-10 h-64 w-64 rounded-full bg-accent-100/70 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-28 -left-20 -z-10 h-64 w-64 rounded-full bg-primary-100/80 blur-3xl" />
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full bg-accent-500 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-white">
+            {COMPANY.slogan}
+          </p>
+          <h2 className="mx-auto max-w-4xl font-sans text-3xl font-extrabold leading-tight tracking-tight text-primary-950 md:text-4xl lg:text-5xl">{title}</h2>
+          <p className="mx-auto mb-8 mt-4 max-w-2xl text-base leading-relaxed text-gray-700 md:text-lg">{description}</p>
+          <div className="flex flex-col justify-center gap-3 sm:flex-row">
+            <button onClick={onPrimary} className="btn-accent">{primaryLabel}</button>
           {secondaryLabel && onSecondary && (
-            <button onClick={onSecondary} className="btn-secondary !bg-white/10 !border-white/30 !text-white hover:!bg-white hover:!text-primary-700">{secondaryLabel}</button>
+              <button onClick={onSecondary} className="btn-secondary">{secondaryLabel}</button>
           )}
+          </div>
         </div>
       </div>
     </section>

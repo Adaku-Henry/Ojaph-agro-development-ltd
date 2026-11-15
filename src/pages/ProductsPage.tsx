@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { CheckCircle2, ArrowRight, ShoppingCart, MessageCircle, Info, Shield, PackageSearch, Clock, Truck, Sun, Droplets, Beaker } from 'lucide-react';
-import { COMPANY, IMAGES, type PageId } from '@/data/company';
+import { COMPANY, type PageId } from '@/data/company';
+import { COMPANY_ACTIVITY_PHOTOS } from '@/data/companyActivities';
 import { SectionTitle, CTASection } from '@/components/ui';
 import { productPhotos, productPhotoGuidance, type ProductPhotoCategory } from '@/data/productPhotos';
 
@@ -26,7 +27,7 @@ const safetyGuidelines = [
 ];
 
 const orderSteps = [
-  { icon: PackageSearch, title: 'Choose the Product', desc: 'Browse our product categories and identify the agricultural input or equipment you require.' },
+  { icon: PackageSearch, title: 'Choose the Product', desc: 'Browse our product categories and identify the agricultural product or equipment you require.' },
   { icon: MessageCircle, title: 'Contact Our Team', desc: 'Send us an enquiry through WhatsApp, telephone or our website contact form.' },
   { icon: Info, title: 'Confirm Availability & Price', desc: 'Our team confirms the product availability, package size and current price.' },
   { icon: ShoppingCart, title: 'Confirm Your Order', desc: 'Provide the required product, quantity and collection or delivery details.' },
@@ -34,11 +35,11 @@ const orderSteps = [
 ];
 
 const faqs = [
-  { q: 'What agricultural products does OJAPH supply?', a: 'We supply improved seeds, agrochemicals, fertilizers, farm tools and selected agricultural equipment.' },
-  { q: 'Do you supply seeds for vegetable production?', a: 'Yes. Vegetable seeds are among our seed categories. Availability depends on the variety and current stock.' },
+  { q: 'What agricultural products are available through OJAPH?', a: 'Our product categories include improved seeds, crop-protection products, fertilizers, farm tools and selected agricultural equipment.' },
+  { q: 'Are seeds for vegetable production available?', a: 'Vegetable seeds are among our product categories. Availability depends on the variety and current stock.' },
   { q: 'Do you sell fertilizers?', a: 'Yes. Our fertilizer range includes DAP, NPK, CAN, urea and selected foliar fertilizer products, subject to availability.' },
   { q: 'Can I buy agricultural products in small quantities?', a: 'You can contact our team to enquire about available package sizes and quantities.' },
-  { q: 'Do you provide guidance on the use of agricultural inputs?', a: 'Yes. Agricultural extension support and product-use guidance are among the services we provide.' },
+  { q: 'Do you provide guidance on the use of agricultural products?', a: 'Yes. Agricultural extension support and product-use guidance are among the services we provide.' },
   { q: 'Can farmer groups make bulk orders?', a: 'Farmer groups and institutions can contact our team to discuss product requirements, quantities and supply arrangements.' },
   { q: 'Are irrigation equipment and greenhouse materials available?', a: 'These are identified as future product areas. Customers should contact us to confirm availability.' },
   { q: 'How can I find out the current prices?', a: 'Contact our team directly for updated prices because product prices and availability may change.' },
@@ -60,31 +61,32 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
 
   return (
     <div>
-      <section className="relative isolate overflow-hidden bg-primary-950 text-white">
-        <div className="absolute inset-y-0 right-0 w-full lg:w-[58%]">
-          <img
-            src="/products/Agri-Products.jpg"
-            alt="Agricultural product assortment from the supplied photo collection"
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-950 via-primary-950/85 to-primary-950/30" />
-        </div>
-        <div className="container-page relative z-10 flex min-h-[520px] items-center py-16 md:py-24">
-          <div className="max-w-2xl rounded-2xl border border-white/15 bg-primary-950/50 p-6 shadow-2xl backdrop-blur-sm sm:p-10">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-accent-300">The OJAPH product journal · Field edition</p>
-            <h1 className="font-display text-4xl font-bold leading-tight text-white md:text-6xl">A closer look at the things that help a farm grow.</h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-primary-100">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#eef5f8] via-white to-primary-50">
+        <div className="container-page grid min-h-[470px] items-center gap-8 py-12 md:py-16 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="max-w-2xl">
+            <p className="mb-5 inline-flex rounded-full bg-accent-500 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-white">The OJAPH Product Journal · Field Edition</p>
+            <h1 className="font-sans text-4xl font-extrabold leading-tight tracking-tight text-primary-950 md:text-5xl lg:text-6xl">
+              A closer look at the products that help a farm <span className="text-accent-600">grow.</span>
+            </h1>
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-gray-700">
               Explore the complete photo collection—from seed packets and crop-care products to practical field notes. Each entry pairs the image with helpful context, without assuming stock, specifications or results that the photo cannot confirm.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <a href="#product-journal" className="btn-accent">
                 Browse {productPhotos.length} photographs <ArrowRight aria-hidden="true" className="h-4 w-4" />
               </a>
-              <span className="text-sm text-primary-100">A visual catalogue · Availability by enquiry</span>
+              <span className="text-sm font-medium text-gray-600">A visual catalogue · Availability by enquiry</span>
             </div>
           </div>
+          <figure className="relative min-h-[280px] overflow-hidden rounded-[2rem] border-4 border-white shadow-xl sm:min-h-[360px]">
+            <img src="/products/Agri-Products.jpg" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" fetchPriority="high" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary-950/25 to-transparent" aria-hidden="true" />
+            <figcaption className="absolute bottom-4 right-4 rounded-full bg-primary-950/70 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm">
+              Product assortment photo from the supplied archive
+            </figcaption>
+            <span className="absolute bottom-0 left-0 h-2 w-28 rounded-tr-full bg-accent-500" aria-hidden="true" />
+          </figure>
         </div>
-        <p className="absolute bottom-3 right-4 z-10 rounded bg-black/60 px-2.5 py-1 text-xs text-white">Product assortment photo from the supplied archive</p>
       </section>
 
       <section className="section-padding bg-white" id="product-journal">
@@ -247,8 +249,8 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
             </div>
             <div>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl mb-6">
-                <img src={IMAGES.soilHands} alt="" aria-hidden="true" className="w-full h-80 object-cover" />
-                <span className="absolute right-3 top-3 rounded bg-black/60 px-2.5 py-1 text-xs text-white">Illustrative photo</span>
+                <img src={COMPANY_ACTIVITY_PHOTOS.shopDisplay.src} alt="" aria-hidden="true" className="w-full h-80 object-cover" loading="lazy" />
+                <span className="absolute right-3 top-3 rounded bg-black/60 px-2.5 py-1 text-xs text-white">Company activity · Products on display</span>
               </div>
               <div className="bg-accent-50 border-l-4 border-accent-500 rounded-r-lg p-6">
                 <h4 className="font-display font-bold text-accent-800 mb-2 flex items-center gap-2">
@@ -270,11 +272,9 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
       </section>
 
       {/* How to Order */}
-      <section className="section-padding bg-primary-900 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-600/20 rounded-full blur-3xl" />
+      <section className="section-padding bg-gradient-to-br from-[#eef5f8] via-white to-primary-50">
         <div className="container-page relative z-10">
           <SectionTitle
-            light
             eyebrow="Simple Process"
             title="How to Order Products"
             subtitle="We aim to make it easy for customers to enquire about agricultural products and confirm availability."
@@ -282,16 +282,16 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {orderSteps.map(({ icon: Icon, ...step }, i) => (
               <div key={i} className="relative">
-                <div className="bg-white/5 backdrop-blur border border-primary-700/30 rounded-xl p-6 text-center">
-                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-white text-primary-700">
+                <div className="h-full rounded-2xl border border-primary-100 bg-white p-6 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
+                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary-50 text-primary-700">
                     <Icon aria-hidden="true" className="h-7 w-7" />
                   </div>
-                  <p className="text-accent-300 font-display text-2xl font-bold mb-2">0{i + 1}</p>
-                  <h4 className="font-display font-bold text-white text-sm mb-2">{step.title}</h4>
-                  <p className="text-xs text-primary-200 leading-relaxed">{step.desc}</p>
+                  <p className="mb-2 font-sans text-2xl font-extrabold text-accent-600">0{i + 1}</p>
+                  <h4 className="mb-2 font-sans text-sm font-bold text-primary-950">{step.title}</h4>
+                  <p className="text-xs leading-relaxed text-gray-600">{step.desc}</p>
                 </div>
                 {i < orderSteps.length - 1 && (
-                  <ArrowRight className="hidden lg:block absolute top-1/2 -right-3 w-6 h-6 text-primary-600 -translate-y-1/2 z-10" />
+                  <ArrowRight className="absolute -right-3 top-1/2 z-10 hidden h-6 w-6 -translate-y-1/2 text-accent-500 lg:block" />
                 )}
               </div>
             ))}
@@ -330,8 +330,8 @@ export default function ProductsPage({ onNavigate }: ProductsPageProps) {
       </section>
 
       <CTASection
-        title="Looking for Quality Agricultural Inputs?"
-        description="Whether you need improved seeds, fertilizers, agrochemicals or farm tools, tell us what you need and our team can help you check availability and obtain relevant product information."
+        title="Looking for Agricultural Products?"
+        description="Whether you need improved seeds, fertilizers, crop-protection products or farm tools, tell us what you need and our team can help you check availability and obtain relevant product information."
         primaryLabel="Enquire About Products"
         onPrimary={() => onNavigate('contact')}
         secondaryLabel="Explore Our Services"
