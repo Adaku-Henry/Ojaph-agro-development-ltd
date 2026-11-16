@@ -1,0 +1,61 @@
+{
+  "siteUrl": "https://ojaphagrodevelopment.org",
+  "logoPath": "/ojaph-logo.png",
+  "pages": {
+    "home": {
+      "path": "/",
+      "title": "Agricultural Support & Inputs in Uganda | OJAPH Agro",
+      "description": "OJAPH Agro Development Limited supports farmers in Uganda with agricultural inputs, extension services, practical training and sustainable farming solutions."
+    },
+    "about": {
+      "path": "/about/",
+      "title": "About OJAPH Agro Development | Uganda",
+      "description": "Learn about OJAPH Agro Development Limited, our team and our work supporting farmers and agricultural communities in Uganda’s West Nile region."
+    },
+    "products": {
+      "path": "/products/",
+      "title": "Agricultural Products in Uganda | OJAPH Agro",
+      "description": "Explore seeds, fertilizers, crop-protection products, farm tools and equipment. Contact OJAPH Agro to confirm current availability and product details."
+    },
+    "services": {
+      "path": "/services/",
+      "title": "Agricultural Services & Farmer Training | OJAPH Agro",
+      "description": "Discover agricultural extension, crop-production support, farmer training and practical services from OJAPH Agro in Uganda."
+    },
+    "resources": {
+      "path": "/resources/",
+      "title": "Farmer Resources & Farming Guides | OJAPH Agro",
+      "description": "Explore practical farming information from OJAPH Agro, including crop production, soil fertility, pest management and post-harvest handling."
+    },
+    "projects": {
+      "path": "/projects/",
+      "title": "Agricultural Projects in West Nile, Uganda | OJAPH",
+      "description": "See OJAPH Agro’s company activities, farmer-support initiatives and agricultural development work in West Nile and across Uganda."
+    },
+    "partners": {
+      "path": "/partners/",
+      "title": "Agricultural Partnerships in Uganda | OJAPH Agro",
+      "description": "Explore partnership opportunities with OJAPH Agro in agricultural supply, farmer education and community development in Uganda."
+    },
+    "contact": {
+      "path": "/contact/",
+      "title": "Contact OJAPH Agro in Uganda | Enquiries & Support",
+      "description": "Contact OJAPH Agro Development Limited about agricultural products, farmer training, services and partnerships in Uganda."
+    },
+    "faq": {
+      "path": "/faq/",
+      "title": "Agricultural Products & Services FAQs | OJAPH Agro",
+      "description": "Find answers about OJAPH Agro’s agricultural products, services, locations and how to contact our team in Uganda."
+    },
+    "privacy": {
+      "path": "/privacy/",
+      "title": "Privacy Policy | OJAPH Agro Development",
+      "description": "Read the OJAPH Agro Development Limited website privacy policy and learn how to contact us with questions about your information."
+    },
+    "terms": {
+      "path": "/terms/",
+      "title": "Terms and Conditions | OJAPH Agro Development",
+      "description": "Review the terms and conditions for using the OJAPH Agro Development Limited website and its agricultural information."
+    }
+  }
+}

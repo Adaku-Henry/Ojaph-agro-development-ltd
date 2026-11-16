@@ -16,6 +16,7 @@ import ProjectsPage from '@/pages/ProjectsPage';
 import ResourcesPage from '@/pages/ResourcesPage';
 import ServicesPage from '@/pages/ServicesPage';
 import type { PageId } from '@/data/company';
+import seoConfig from '../seo.config.json';
 
 const pageIds: PageId[] = [
   'home',
@@ -31,27 +32,45 @@ const pageIds: PageId[] = [
   'terms',
 ];
 
-const pageTitles: Record<PageId, string> = {
-  home: 'OJAPH Agro Development Limited | Farming for Development',
-  about: 'About Us | OJAPH Agro',
-  products: 'Products | OJAPH Agro',
-  services: 'Services | OJAPH Agro',
-  resources: 'Farmer Resources | OJAPH Agro',
-  projects: 'Projects & Gallery | OJAPH Agro',
-  partners: 'Partners | OJAPH Agro',
-  contact: 'Contact Us | OJAPH Agro',
-  faq: 'FAQs | OJAPH Agro',
-  privacy: 'Privacy Policy | OJAPH Agro',
-  terms: 'Terms & Conditions | OJAPH Agro',
-};
-
 function pageFromPath(pathname: string): PageId {
   const slug = pathname.replace(/^\/+|\/+$/g, '').toLowerCase();
   return pageIds.find((page) => page === slug) ?? 'home';
 }
 
 function pathForPage(page: PageId): string {
-  return page === 'home' ? '/' : `/${page}`;
+  return seoConfig.pages[page].path;
+}
+
+function updateMeta(name: string, content: string) {
+  const element = document.head.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
+  if (element) element.content = content;
+}
+
+function updateProperty(property: string, content: string) {
+  const element = document.head.querySelector<HTMLMetaElement>(`meta[property="${property}"]`);
+  if (element) element.content = content;
+}
+
+function updatePageMetadata(page: PageId) {
+  const metadata = seoConfig.pages[page];
+  const canonicalUrl = `${seoConfig.siteUrl}${metadata.path}`;
+  const logoUrl = `${seoConfig.siteUrl}${seoConfig.logoPath}`;
+
+  document.title = metadata.title;
+  updateMeta('description', metadata.description);
+  updateMeta('twitter:title', metadata.title);
+  updateMeta('twitter:description', metadata.description);
+  updateProperty('og:title', metadata.title);
+  updateProperty('og:description', metadata.description);
+  updateProperty('og:url', canonicalUrl);
+
+  const canonicalLink = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (canonicalLink) canonicalLink.href = canonicalUrl;
+
+  const openGraphImage = document.head.querySelector<HTMLMetaElement>('meta[property="og:image"]');
+  if (openGraphImage) openGraphImage.content = logoUrl;
+
+  updateMeta('twitter:image', logoUrl);
 }
 
 function App() {
@@ -75,8 +94,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-      document.title = pageTitles[currentPage];
-      window.scrollTo({ top: 0, behavior: 'auto' });
+    updatePageMetadata(currentPage);
+    window.scrollTo({ top: 0, behavior: 'auto' });
   }, [currentPage]);
 
   const navigate = (page: PageId) => {
